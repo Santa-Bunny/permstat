@@ -3,6 +3,6 @@
 
 Display::Display(){
     initscr();
-    printw("HELLO WORLD");
+    cbreak();
     refresh();
 }
