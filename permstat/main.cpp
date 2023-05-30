@@ -1,8 +1,3 @@
-#include <deque>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <exception>
+#include "main.h"
 
 #include <getopt.h>
-#include <ncurses.h>
