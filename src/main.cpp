@@ -6,8 +6,10 @@
 #include <curses.h>
 
 int main(int argc, char** argv){
-    Display disply;
     windowSize stdSize;
+    initscr();
+    cbreak();
+    refresh();
 
     getWsize(stdscr, &stdSize);
     WINDOW* win = newwin(10, stdSize.maxX - 2, (stdSize.maxY / 2 - 5), stdSize.begX + 2);
