@@ -34,18 +34,3 @@ void scanWin(WINDOW* win, windowSize* winsize){
     mvwprintw(win, 8, 2, "Scanning...");
     wrefresh(win);
 }
-
-
-
-
-
-void testing(){
-    int y = 5, x = 5;
-
-    move(y, x);
-    printw("hello world");
-    
-
-    move(0,0);
-    char v = getch();
-}
