@@ -3,6 +3,13 @@
 
 #include <curses.h>
 
+struct windowSize {
+    int maxY;
+    int maxX;
+    int begY;
+    int begX;
+};
+
 class Display {
 public:
     Display();
@@ -12,6 +19,9 @@ public:
 private:
     
 };
+
+
+void getWsize(WINDOW* win, struct windowSize* sizes);
 
 
 #endif // DISPLAY_H

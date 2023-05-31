@@ -1,6 +1,8 @@
 # PermStat
 ### A permissions manager in gui form
 
+## Note: This project is still not fully functional. For the latest updates check the Dev branch.
+
 ## Overview
 
 While performing server maintenance I often found myself going directory by directory adjusting permissions

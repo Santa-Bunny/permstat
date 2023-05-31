@@ -5,13 +5,13 @@
 
 #include <curses.h>
 
-int main(){
+int main(int argc, char** argv){
     Display disply;
     windowSize stdSize;
 
     getWsize(stdscr, &stdSize);
-
-    scanWin();
+    WINDOW* win = newwin(10, stdSize.maxX - 2, (stdSize.maxY / 2 - 5), stdSize.begX + 2);
+    scanWin(win, &stdSize);
 
     getch();
     final(0);
@@ -26,25 +26,16 @@ void final(int exitnum){
 }
 
 /// @brief Makes the box to start scanning and calls scan program
-void scanWin(){
-    WINDOW* win = newwin(10,20,0,0);
-    refresh();
-    
+void scanWin(WINDOW* win, windowSize* winsize){
     box(win, 0, 0);
-    mvwprintw(win, 0, 2, "Scanning...");
+    mvwprintw(win, 0, 3, "Scanning...");
+    mvwprintw(win, 2, 2, "Total items: %d", 0);
+    mvwprintw(win, 3, 2, "Current item: %s", "/mnt/docs");
+    mvwprintw(win, 8, 2, "Scanning...");
     wrefresh(win);
-
-
 }
 
-/// @brief Gets the size of the window in rows/columns and loads it into sizes
-/// @param win the window to get the size of
-/// @param sizes the location in memory to store the sizes
-void getWsize(WINDOW* win, struct windowSize* sizes){
-    getbegyx(win, sizes->begY, sizes->begX);
-    getmaxyx(win, sizes->maxY, sizes->maxX);
-    return;
-}
+
 
 
 

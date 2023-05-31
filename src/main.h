@@ -7,22 +7,13 @@
 #include <algorithm>
 #include <exception>
 
-
+#include "display.h"
 #include <ncurses.h>
 
-#define BLOCK_LIGHT  176
-#define BLOCK_MEDIUM 177
-#define BLOCK_DENSE  178
 
-struct windowSize {
-    int maxY;
-    int maxX;
-    int begY;
-    int begX;
-};
 
 void final(int exitnum);
-void scanWin();
-void getWsize(WINDOW* win, struct windowSize* sizes);
+void scanWin(WINDOW* win, windowSize* winsize);
+
 
 #endif // MAIN_H
