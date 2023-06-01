@@ -1,3 +1,11 @@
+# TODO: Change LIBBOOST_FS to the correct path to the filesystem precompiled static library
+#
+# If on unix style OS: your precompiled library will likely be very similar to this path, 
+# though often x86_64 can be switched for other names
+#
+# if on Win style OS: 
+LIBBOOST_FS = /usr/lib/x86_64-linux-gnu/libboost_filesystem.a
+
 # designate which compiler to use
 CXX			= g++
 
@@ -29,7 +37,7 @@ all: ${EXECUTABLE}
 
 # Compile the pager and tag this compilation
 ${EXECUTABLE}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXECUTABLE} -lncurses
+	${CXX} ${CXXFLAGS} ${OBJECTS} ${LIBBOOST_FS} -o ${EXECUTABLE} -lncurses
 
 # Generic rules for compiling a source file to an object file
 %.o: %.cpp
