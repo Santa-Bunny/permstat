@@ -3,13 +3,13 @@
 
 
 int main() {
-    Filesystm fs("./../.");
+    Filesystm fs("./../../.");
 
     int depth = fs.depth();
 
     std::cout << "path                     perms          depth\n";
 
-    while(depth <= fs.depth()){
+    while(fs.good()){
         std::cout << fs.path() << "      " << fs.perms() << "       " << fs.depth() << std::endl;
         fs.next();
     }
