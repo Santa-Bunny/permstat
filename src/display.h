@@ -10,17 +10,6 @@ struct windowSize {
     int begX;
 };
 
-class Display {
-public:
-    Display();
-
-    ~Display(){};
-
-private:
-    
-};
-
-
 void getWsize(WINDOW* win, struct windowSize* sizes);
 
 

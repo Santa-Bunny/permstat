@@ -10,7 +10,13 @@ on a file by file basis. I found myself wishing that I had something akin to [Wi
 
 The end goal is to have a NCDU like interface with colored text that can display at a glance the permissions of each file and directory. There are many options for extras to increase productivity such as filters and searching; however the primary focus at this point in development is functionality and end-user QOL.
 
+## Dependencies
 
-## NCurses
+#### Ncurses
+You must have NCurses library installed to be able to use permstat. 
+If you choose to build permstat from source your compiler will also need to have the `-lncurses` flag
 
-NCurses was chosen over other similar application types like Xterm for its backportability on all machine types and operating systems.
+#### Boost.Filesystem
+The scanning method relies on Boost::Filesystem.
+Boost filesystem needs to be precompiled into a binary with Boost Build before it can be used in compilation of permstat.
+Please follow [Boost Getting Started](https://www.boost.org/doc/libs/1_82_0/more/getting_started) to learn how to compile the filesystem binary.

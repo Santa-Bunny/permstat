@@ -6,8 +6,10 @@
 #include <curses.h>
 
 int main(int argc, char** argv){
-    Display disply;
     windowSize stdSize;
+    initscr();
+    cbreak();
+    refresh();
 
     getWsize(stdscr, &stdSize);
     WINDOW* win = newwin(10, stdSize.maxX - 2, (stdSize.maxY / 2 - 5), stdSize.begX + 2);
@@ -33,19 +35,4 @@ void scanWin(WINDOW* win, windowSize* winsize){
     mvwprintw(win, 3, 2, "Current item: %s", "/mnt/docs");
     mvwprintw(win, 8, 2, "Scanning...");
     wrefresh(win);
-}
-
-
-
-
-
-void testing(){
-    int y = 5, x = 5;
-
-    move(y, x);
-    printw("hello world");
-    
-
-    move(0,0);
-    char v = getch();
 }
