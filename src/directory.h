@@ -2,6 +2,7 @@
 #define DIRECTORY_H
 
 #include <boost/filesystem.hpp>
+#include "scan.h"
 
 
 
@@ -29,20 +30,24 @@ public:
     Node* child;
     Node* left;
     Node* right;
-
-    protected:
     boost::filesystem::directory_entry entry;
-
+    
 };
 
 
 
 
 class Directory_tracker {
+    Directory_tracker() : fs(Filesystm(".")) {}
+    Directory_tracker(std::string directory_to_scan) : fs(Filesystm(directory_to_scan)) {}
+    ~Directory_tracker(){};
+
     void save(std::string path);
+    void scan();
 
 private:
     Node root;
+    Filesystm fs;
 };
 
 
