@@ -29,14 +29,18 @@ int Filesystm::depth(){
         return dir_it.depth();
 }
 
+/// @brief gets permissions as a Enum type
+/// @return Enum.perms with values of permissions
+boost::filesystem::perms Filesystm::perms(){
+    return dir_it->status().permissions();
+}
+
 /// @brief Checks to see wether the filesystem iterator is at the end
 /// @return 0 when iterator finishes. 1 when iterator is still traversing
 int Filesystm::good(){
     return dir_it != end(dir_it);
 }
 
-/// @brief gets permissions as a Enum type
-/// @return Enum.perms with values of permissions
-boost::filesystem::perms Filesystm::perms(){
-    return dir_it->status().permissions();
+boost::filesystem::directory_entry Filesystm::entry(){
+    return *dir_it;
 }

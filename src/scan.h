@@ -23,6 +23,8 @@ class Filesystm {
     boost::filesystem::perms perms();
 
     int good();
+    
+    boost::filesystem::directory_entry entry();
 
     private:
     boost::filesystem::recursive_directory_iterator dir_it;
