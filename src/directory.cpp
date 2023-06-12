@@ -12,7 +12,7 @@ void Directory_tracker::save_text(std::string path) {
 }
 
 void Directory_tracker::write_text(std::ostream os){
-
+    Directory_tracker::Iterator it(&root);
 }
 
 void Directory_tracker::save_xml(std::string path) {
@@ -87,11 +87,9 @@ Node* Directory_tracker::level_jump(int diff, Node* base){
     return node;
 }
 
-Node* Directory_tracker::iterator::operator*() {
-    return node;
-};
 
-void Directory_tracker::iterator::next(){
+
+void Directory_tracker::Iterator::next(){
     if (!good){
         throw permstat::dir_error("ERROR: Directory_tracker::iterator.next() use of bad iterator: nullptr");
     }
@@ -116,7 +114,7 @@ void Directory_tracker::iterator::next(){
     }
 }
 
-void Directory_tracker::iterator::prev(){// TODO: finish
+void Directory_tracker::Iterator::prev(){// TODO: finish
     if (!good){
         throw permstat::dir_error("ERROR: Directory_tracker::iterator.prev() use of bad iterator: nullptr");
     }

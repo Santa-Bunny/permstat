@@ -4,6 +4,9 @@
 #include <boost/filesystem.hpp>
 #include "scan.h"
 
+#include <iterator>
+#include <cstddef>
+
 
 
 class Node {
@@ -46,34 +49,51 @@ class Directory_tracker {
     void save_xml(std::string path);
     void scan();
 
-    Node* end(){ return nullptr; }
-    Node* begin(){ return &root; }
+    struct Iterator 
+    {
+        using iterator_category = std::bidirectional_iterator_tag;
+        using difference_type   = std::ptrdiff_t; // Not actually useful but required
+        using value_type        = Node;
+        using pointer           = Node*;
+        using reference         = Node&;
+
+        Iterator() : node(nullptr), good(0) {};
+        Iterator(Node* n) : node(n), good(1) {};
+
+        reference operator*() const { return *node; }
+        pointer operator->() { return node; }
+
+        // Prefix increment
+        Iterator& operator++() { this->next(); return *this; } 
+        Iterator& operator--() { this->prev(); return *this; } 
+
+        // Postfix increment
+        Iterator operator++(int) { Iterator tmp = *this; ++(*this); return tmp; }
+        Iterator operator--(int) { Iterator tmp = *this; --(*this); return tmp; }
+
+        friend bool operator== (const Iterator& a, const Iterator& b) { return a.node == b.node; };
+        friend bool operator!= (const Iterator& a, const Iterator& b) { return a.node != b.node; };
+        bool isgood(){ return good; }
+
+        void next();
+        void prev();
+
+    private:
+        Node* node;
+        bool good = 1;
+    };
+
+    Iterator end(){ return Iterator(); }
+    Iterator begin(){ return Iterator(&root); }
 
 
-private:
+protected:
     Node root;
     Filesystm fs;
 
     void write_text(std::ostream os);
     void write_xml(std::ostream os);
     Node* level_jump(int diff, Node* base);
-
-
-
-public:
-    class iterator {
-        iterator() : node(nullptr), good(0) {};
-        iterator(Node* n) : node(n), good(1) {};
-        void next();
-        void prev();
-
-        Node* operator*();
-        bool isgood(){ return good; }
-
-    private:
-        Node* node;
-        bool good = 1;
-    };
 };
 
 
