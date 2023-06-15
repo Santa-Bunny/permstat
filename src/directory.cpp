@@ -167,5 +167,5 @@ void Directory_tracker::Iterator::prev(){// TODO: finish
 
 // TODO: replace entire string with fill character
 void write_reset(std::string& s, char c){
-    s = std::string(s.length(), c);
+    s.replace(s.begin(), s.end(), c);
 }
