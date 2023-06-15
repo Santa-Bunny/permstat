@@ -13,10 +13,14 @@ void Directory_tracker::save_text(std::string path) {
 
 void Directory_tracker::write_text(std::ostream os){
     Directory_tracker::Iterator it(&root);
-    std::string whitspace(longest_path + 5, ' ');
-    std::string linespace(longest_path + 5, '-');
-    while(it.isgood()) {
+    std::string whitspace(longest_path + 5, ' '); // adding 5 for permissions at the end
+    std::string linespace(longest_path + 5, '-'); // lines every other to ease reading
+    bool linetype = 0;
+    
+    
 
+    while(it.isgood()) {
+        
 
         ++it;
     }
@@ -152,4 +156,9 @@ void Directory_tracker::Iterator::prev(){// TODO: finish
             jump = CHILD;
         }
     }
+}
+
+// TODO: replace entire string with fill character
+void write_reset(std::string& s, char c){
+    
 }

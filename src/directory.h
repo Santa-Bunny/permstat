@@ -7,10 +7,11 @@
 #include <iterator>
 #include <cstddef>
 
-#define NEIGHBOR    0
-#define PARENT      1
-#define CHILD       2
 #define FAIL        -1
+#define NEIGHBOR     0
+#define PARENT       1
+#define CHILD        2
+
 
 class Node {
 public:
@@ -97,6 +98,7 @@ protected:
     Node root;
     Filesystm fs;
     uint longest_path;
+    void write_reset(std::string& s, char c);
 
     void write_text(std::ostream os);
     void write_xml(std::ostream os);
