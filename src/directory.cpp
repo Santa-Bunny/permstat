@@ -17,10 +17,17 @@ void Directory_tracker::write_text(std::ostream os){
     std::string linespace(longest_path + 5, '-'); // lines every other to ease reading
     bool linetype = 0;
     
-    
+    whitspace.replace(whitspace.begin(), whitspace.begin() + 4, "path");
+    whitspace.replace(whitspace.begin() + whitspace.length() - 6, whitspace.begin() + whitspace.length() - 1, "perms");
+    os << whitspace << '\n' << linespace << std::endl; // label columns and insert break
 
     while(it.isgood()) {
-        
+        if (linetype){  // Whitepaces
+
+        }
+        else {          // Lines
+
+        }
 
         ++it;
     }
@@ -160,5 +167,5 @@ void Directory_tracker::Iterator::prev(){// TODO: finish
 
 // TODO: replace entire string with fill character
 void write_reset(std::string& s, char c){
-    
+    s = std::string(s.length(), c);
 }
