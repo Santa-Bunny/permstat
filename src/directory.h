@@ -7,7 +7,10 @@
 #include <iterator>
 #include <cstddef>
 
-
+#define NEIGHBOR    0
+#define PARENT      1
+#define CHILD       2
+#define FAIL        -1
 
 class Node {
 public:
@@ -78,9 +81,12 @@ class Directory_tracker {
         void next();
         void prev();
 
+        int step_type() { return jump; }
+
     private:
         Node* node;
         bool good = 1;
+        int jump = FAIL;
     };
 
     Iterator end(){ return Iterator(); }
@@ -90,6 +96,7 @@ class Directory_tracker {
 protected:
     Node root;
     Filesystm fs;
+    uint longest_path;
 
     void write_text(std::ostream os);
     void write_xml(std::ostream os);

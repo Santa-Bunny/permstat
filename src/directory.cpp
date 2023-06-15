@@ -13,6 +13,13 @@ void Directory_tracker::save_text(std::string path) {
 
 void Directory_tracker::write_text(std::ostream os){
     Directory_tracker::Iterator it(&root);
+    std::string whitspace(longest_path + 5, ' ');
+    std::string linespace(longest_path + 5, '-');
+    while(it.isgood()) {
+
+
+        ++it;
+    }
 }
 
 void Directory_tracker::save_xml(std::string path) {
@@ -28,6 +35,7 @@ void Directory_tracker::write_xml(std::ostream os){
 void Directory_tracker::scan(){
     int depth;
     int prev_depth = fs.depth();
+    longest_path = fs.path().length();
     Node* node;
     Node* prev_node = &root;
 
@@ -63,7 +71,9 @@ void Directory_tracker::scan(){
             return;
         }
         
-
+        if (fs.path().length() > longest_path) {
+            longest_path = fs.path().length();
+        }
         prev_node = node;
         prev_depth = depth;
         fs.next();
@@ -96,18 +106,22 @@ void Directory_tracker::Iterator::next(){
 
     if (node->child) {          // jump into this file
         node = node->child;
+        jump = CHILD;
     }
     else if (node->left) {      // go to next file
         node = node->left;
+        jump = NEIGHBOR;
     }
     else {                      // Go up to next parent file
         while (node->parent->left == nullptr){
             if (node == nullptr){
                 good = 0;
+                jump = FAIL;
                 return;
             }
             else {
                 node = node->parent;
+                jump = PARENT;
             }
         }
         node = node->parent->left;
@@ -122,17 +136,20 @@ void Directory_tracker::Iterator::prev(){// TODO: finish
     if (node->right == nullptr){            // up to parent
         if (node->right->parent == nullptr){
             good = 0;
+            jump = FAIL;
             return;
         }
         node = node->parent;
     }
     else if (node->right->child == nullptr){ // right to next
         node = node->right;
+        jump = NEIGHBOR;
     }
     else {                                  // down to child
         node = node->right;
         while (node->child != nullptr) {
             node = node->child;
+            jump = CHILD;
         }
     }
 }
