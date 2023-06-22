@@ -1,5 +1,7 @@
 #include <boost/filesystem.hpp>
 #include <string>
+#include <sstream>
+#include <fstream>
 
 #include "pexceptions.h"
 #include "directory.h"
@@ -8,36 +10,69 @@
 
 
 void Directory_tracker::save_text(std::string path) {
-    
+    std::fstream fs(path, fs.out);
+    if (!fs.is_open()) {
+        throw std::runtime_error("ERROR: Directory_tracker::save_text: Unable to open file\n");
+    }
+    write_text(fs);
+    fs.close();
 }
 
-void Directory_tracker::write_text(std::ostream os){
+void Directory_tracker::write_text(std::ostream &os){
     Directory_tracker::Iterator it(&root);
     std::string whitspace(longest_path + 5, ' '); // adding 5 for permissions at the end
     std::string linespace(longest_path + 5, '-'); // lines every other to ease reading
+    int start_of_perms = whitspace.length() - 4;
+
+    std::stringstream ss;
+    std::string s;
+
     bool linetype = 0;
+    int oldlength = 0;
     
     whitspace.replace(whitspace.begin(), whitspace.begin() + 4, "path");
     whitspace.replace(whitspace.begin() + whitspace.length() - 6, whitspace.begin() + whitspace.length() - 1, "perms");
     os << whitspace << '\n' << linespace << std::endl; // label columns and insert break
 
     while(it.isgood()) {
-        if (linetype){  // Whitepaces
+        if (it->entry.path().string().length() < oldlength) {   // reset writing distance
+            oldlength = it->entry.path().string().length();
+            whitspace.replace(0, 256, 256, ' ');
+            linespace.replace(0, 256, 256, '-');
+        }
+        else {
+            oldlength = it->entry.path().string().length();
+        }
 
+        ss << it->entry.status().permissions();
+        ss >> s;
+        if (linetype){  // Whitepaces
+            whitspace.replace(0, oldlength, it->entry.path().string());
+            whitspace.replace(start_of_perms, start_of_perms + 3, s);
+            os << whitspace << '\n';
         }
         else {          // Lines
-
+            linespace.replace(0, oldlength, it->entry.path().string());
+            linespace.replace(start_of_perms, start_of_perms + 3, s);
+            os << linespace << '\n';
         }
 
+
+        linetype != linetype;
         ++it;
     }
 }
 
 void Directory_tracker::save_xml(std::string path) {
-    
+    std::fstream fs(path, fs.out);
+    if (!fs.is_open()) {
+        throw std::runtime_error("ERROR: Directory_tracker::save_xml: Unable to open file\n");
+    }
+    write_xml(fs);
+    fs.close();
 }
 
-void Directory_tracker::write_xml(std::ostream os){
+void Directory_tracker::write_xml(std::ostream & os){
 
 }
 
@@ -163,9 +198,4 @@ void Directory_tracker::Iterator::prev(){// TODO: finish
             jump = CHILD;
         }
     }
-}
-
-// TODO: replace entire string with fill character
-void write_reset(std::string& s, char c){
-    s.replace(s.begin(), s.end(), c);
 }

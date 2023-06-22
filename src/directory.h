@@ -45,6 +45,7 @@ public:
 
 
 class Directory_tracker {
+public:
     Directory_tracker() : fs(Filesystm(".")) {}
     Directory_tracker(std::string directory_to_scan) : fs(Filesystm(directory_to_scan)) {}
     ~Directory_tracker(){};
@@ -98,10 +99,9 @@ protected:
     Node root;
     Filesystm fs;
     uint longest_path;
-    void write_reset(std::string& s, char c);
 
-    void write_text(std::ostream os);
-    void write_xml(std::ostream os);
+    void write_text(std::ostream &os);
+    void write_xml(std::ostream &os);
     Node* level_jump(int diff, Node* base);
 };
 
