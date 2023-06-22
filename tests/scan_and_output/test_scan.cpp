@@ -1,9 +1,9 @@
-#include "../src/scan.h"
+#include "../../src/scan.h"
 #include <iostream>
 
 
 int main() {
-    Filesystm fs("./../../.");
+    Filesystm fs("./../../../.");
 
     int depth = fs.depth();
 

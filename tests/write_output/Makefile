@@ -17,7 +17,7 @@ OBJECTS		= $(SOURCES:%.cpp=%.o)
 #Default Flags
 CXXFLAGS = -std=c++14 -Wconversion -Wall -Werror -Wextra -pedantic
 
-EXECUTABLE = test_scan
+EXECUTABLE = test_write
 
 # make release - will compile "all" with $(CXXFLAGS) and the -O3 flag
 #				 also defines NDEBUG so that asserts will not check
@@ -34,13 +34,16 @@ profile: CXXFLAGS += -pg
 profile: clean all
 
 scan:
-	${CXX} ../src/scan.cpp -c
+	${CXX} ../../src/scan.cpp -c
 
-all: scan ${EXECUTABLE}
+directory:
+	${CXX} ../../src/directory.cpp -c
+
+all: scan directory ${EXECUTABLE}
 
 # Compile the pager and tag this compilation
 ${EXECUTABLE}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} scan.o ${LIBBOOST_FS} -o ${EXECUTABLE} -lncurses
+	${CXX} ${CXXFLAGS} ${OBJECTS} scan.o directory.o ${LIBBOOST_FS} -o ${EXECUTABLE} -lncurses
 
 # Generic rules for compiling a source file to an object file
 %.o: %.cpp
@@ -50,7 +53,7 @@ ${EXECUTABLE}: ${OBJECTS}
 
 # make clean - remove .o files, executables
 clean:
-	rm -f $(OBJECTS) scan.o $(EXECUTABLE)
+	rm -f $(OBJECTS) scan.o directory.o $(EXECUTABLE)
 
 define MAKEFILE_HELP
 Makefile Help
