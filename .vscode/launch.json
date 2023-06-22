@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+
+        {                
+            "name": "test_write",
+            "type": "cppdbg",
+            "request": "launch",
+           "program": "${cwd}/tests/write_output/test_write",
+            "cwd": ".",
+            "args": [ 
+                ""
+            ]
+        }
+    ]
+}
