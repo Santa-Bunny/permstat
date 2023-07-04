@@ -18,7 +18,7 @@ int main() {
     }
     catch (std::exception e) {
         system("python3 ./../dirgen/dirclean.py");
-        std::cerr << e.what();
+        std::cerr << e.what() << std::endl;
         exit (1);
     }
 
