@@ -17,7 +17,7 @@ try:
     os.mkdir("./root_node/dir3/dir3dir1/dir3dir1dir1")
     os.mkdir("./root_node/dir3/dir3dir2")
 
-    datafile = open("data.txt", "r")
+    datafile = open("./../dirgen/data.txt", "r")
     f1 = open("./root_node/file1.txt", "w")
     f1.write(datafile.readline() + datafile.readline())
     f1.close()
@@ -61,6 +61,8 @@ try:
     f311 = open("./root_node/dir3/dir3dir1/dir3dir1dir1/file1.txt", "w")
     f311.write(datafile.readline() + '\n' + datafile.readline() + '\n' + datafile.readline() + '\n' + datafile.readline())
     f311.close()
+
+    datafile.close()
 
 except Exception:
     traceback.print_exc()
