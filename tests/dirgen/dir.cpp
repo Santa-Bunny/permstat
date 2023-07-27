@@ -6,7 +6,7 @@
 #define root_folder     "./root_node"
 
 
-void help();
+void help(char** argv);
 void dirmake();
 void dirclean();
 void makefile(std::ifstream &datafile, const std::string &path, int lines_to_read);
@@ -38,7 +38,7 @@ void help(char** argv) {
 
 void dirmake() {
     std::ifstream datafile;
-    datafile.open(ipsum, std::ios::in);
+    datafile.open(ipsum);
     if (!datafile.is_open()) {
         std::cerr << "ERROR: dirmake: Cannot open datafile" << std::endl;
         exit(1);
@@ -46,18 +46,18 @@ void dirmake() {
 
 
     // Parent Directories
-    boost::filesystem::directory_entry("./root_node");
-    boost::filesystem::directory_entry("./root_node/dir1");
-    boost::filesystem::directory_entry("./root_node/dir2");
-    boost::filesystem::directory_entry("./root_node/dir3");
-    boost::filesystem::directory_entry("./root_node/dir4");
+    boost::filesystem::create_directory("./root_node");
+    boost::filesystem::create_directory("./root_node/dir1");
+    boost::filesystem::create_directory("./root_node/dir2");
+    boost::filesystem::create_directory("./root_node/dir3");
+    boost::filesystem::create_directory("./root_node/dir4");
 
     // Child directories
-    boost::filesystem::directory_entry("./root_node/dir1/dir1dir1");
-    boost::filesystem::directory_entry("./root_node/dir1/dir1dir2");
-    boost::filesystem::directory_entry("./root_node/dir3/dir3dir1");
-    boost::filesystem::directory_entry("./root_node/dir3/dir3dir1/dir3dir1dir1");
-    boost::filesystem::directory_entry("./root_node/dir3/dir3dir2");
+    boost::filesystem::create_directory("./root_node/dir1/dir1dir1");
+    boost::filesystem::create_directory("./root_node/dir1/dir1dir2");
+    boost::filesystem::create_directory("./root_node/dir3/dir3dir1");
+    boost::filesystem::create_directory("./root_node/dir3/dir3dir1/dir3dir1dir1");
+    boost::filesystem::create_directory("./root_node/dir3/dir3dir2");
 
     // files
     makefile(datafile, "./root_node/file1.txt", 2);
