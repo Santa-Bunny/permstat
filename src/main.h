@@ -8,7 +8,7 @@
 #include <exception>
 
 #include "display.h"
-#include <ncurses.h>
+#include <curses.h>
 
 
 
