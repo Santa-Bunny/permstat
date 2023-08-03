@@ -3,7 +3,8 @@
 
 
 int main() {
-    system("python3 ./../dirgen/dirmake.py");
+    system("make -C ./../dirgen/");
+    system("./../dirgen/dir m");
     try {
         Filesystm fs("./../dirgen/root_node");
 
@@ -17,10 +18,11 @@ int main() {
         }
     }
     catch (std::exception e) {
-        system("python3 ./../dirgen/dirclean.py");
+        system("./../dirgen/dir c");
         std::cerr << e.what() << std::endl;
         exit (1);
     }
-
+    system("./../dirgen/dir c");
+    system("make -C ./../dirgen/ clean");
     return 0;
 }

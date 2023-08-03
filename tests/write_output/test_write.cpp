@@ -5,7 +5,8 @@
 
 
 int main() {
-    system("python3 ./../dirgen/dirmake.py");
+    system("make -C ./../dirgen/");
+    system("./../dirgen/dir m");
     try {
         Directory_tracker fs("./../dirgen/root_node");
 
@@ -16,11 +17,12 @@ int main() {
         std::cout << "Task Complete!" << std::endl;
     }
     catch (std::exception e) {
-        system("python3 ./../dirgen/dirclean.py");
+        system("./../dirgen/dir c");
         std::cerr << e.what();
         exit (1);
     }
 
-    
+    system("./../dirgen/dir c");
+    system("make -C ./../dirgen/ clean");
     return 0;
 }
